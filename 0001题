@@ -1,0 +1,17 @@
+import random
+import numpy as np
+import pandas as pd
+
+def code_made(length):
+    str = "abcdefghijklmnopqrstuvwxyz1234567890"
+    return "".join([random.choice(str) for i in range(length)])   #分length从str中取一个字符串
+
+counts = int(input("请输入优惠券个数："))
+length = int(input("请输入优惠券长度："))
+
+#生成n行1列的形式
+info = [code_made(length)for i in range(counts)]  #info中存储的是所有的优惠券信息
+info_array = np.array(info).reshape(counts,1)  #reshape不改变形状，resize改变形状
+#生成表格形式
+frame = pd.DataFrame(info_array,index=range(1,counts+1),columns=['优惠券'])
+print(frame)
